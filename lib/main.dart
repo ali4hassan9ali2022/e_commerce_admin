@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,6 +10,10 @@ class EcommerceAdmin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: "Ecommerce Admin",
+      routerConfig: AppRouter.router,
+    );
   }
 }
