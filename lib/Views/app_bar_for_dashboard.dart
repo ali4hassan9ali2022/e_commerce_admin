@@ -1,17 +1,18 @@
+import 'package:ecommerce_admin/Core/Theme_Cubit/theme_cubit.dart';
+import 'package:ecommerce_admin/Core/Theme_Cubit/theme_state.dart';
 import 'package:ecommerce_admin/Core/utils/assets.dart';
 import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBarForDashboard extends StatelessWidget {
-  const AppBarForDashboard({
-    super.key,
-    required this.size,
-  });
+  const AppBarForDashboard({super.key, required this.size});
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
+    var theme = BlocProvider.of<ThemeCubit>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       child: Row(
@@ -24,9 +25,21 @@ class AppBarForDashboard extends StatelessWidget {
           SizedBox(width: 16),
           ShimmerText(text: "ShopSmart"),
           Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.light_mode, size: 35),
+          BlocConsumer<ThemeCubit, ThemeState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  theme.chanageTheme();
+                },
+                icon: Icon(
+                  theme.isDark ? Icons.dark_mode : Icons.light_mode,
+                  size: 35,
+                ),
+              );
+            },
           ),
         ],
       ),

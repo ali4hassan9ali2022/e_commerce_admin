@@ -8,20 +8,20 @@ class ThemeCubit extends Cubit<ThemeState> {
     getTheme();
   }
   bool isDark = false;
-  Future<void> chanageTheme(bool? isValue) async{
+  Future<void> chanageTheme({bool? isValue}) async {
     if (isValue != null) {
       isDark = isValue;
       emit(DarkThemeState());
     } else {
-      await CacheHelper().saveData(key: AppHelper.kDark, value: isDark);
       isDark = !isDark;
+      await CacheHelper().saveData(key: AppHelper.kDark, value: isDark);
       emit(DarkThemeState());
     }
   }
+
   Future<bool> getTheme() async {
-    isDark =
-        await CacheHelper().getData(key: AppHelper.kDark) ?? false;
-    emit(LightThemeState());
+    isDark = await CacheHelper().getData(key: AppHelper.kDark) ?? false;
+    emit(DarkThemeState());
     return isDark;
   }
 }
