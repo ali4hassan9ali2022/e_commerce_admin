@@ -12,7 +12,9 @@ abstract class AppHelper {
     DashboardModel(
       title: "Add a new product",
       imagePath: Assets.imagesCloud,
-      function: () {},
+      function: () {
+        GoRouter.of(context).push(AppRouter.kAddProductView);
+      },
     ),
     DashboardModel(
       title: "Inspect all products",
