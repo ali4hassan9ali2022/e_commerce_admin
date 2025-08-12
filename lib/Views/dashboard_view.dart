@@ -1,5 +1,5 @@
 import 'package:ecommerce_admin/Core/Helper/app_helper.dart';
-import 'package:ecommerce_admin/Views/app_bar_for_dashboard.dart';
+import 'package:ecommerce_admin/Widgets/app_bar_for_dashboard.dart';
 import 'package:ecommerce_admin/Widgets/dashboard_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class DashboardView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            AppBarForDashboard(size: size,title: "ShopSmart",),
+            AppBarForDashboard(size: size, title: "ShopSmart", isShow: true),
             SizedBox(height: 30),
             Expanded(
               child: GridView.count(

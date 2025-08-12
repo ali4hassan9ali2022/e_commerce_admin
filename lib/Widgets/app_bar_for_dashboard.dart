@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBarForDashboard extends StatelessWidget {
-  const AppBarForDashboard({super.key, required this.size, required this.title});
-
+  const AppBarForDashboard({super.key, required this.size, required this.title,this.isShow = false});
+  final bool? isShow;
   final Size size;
   final String title;
   @override
@@ -25,7 +25,7 @@ class AppBarForDashboard extends StatelessWidget {
           SizedBox(width: 16),
           ShimmerText(text: title),
           Spacer(),
-          BlocConsumer<ThemeCubit, ThemeState>(
+        isShow == true ?   BlocConsumer<ThemeCubit, ThemeState>(
             listener: (context, state) {
               // TODO: implement listener
             },
@@ -40,7 +40,7 @@ class AppBarForDashboard extends StatelessWidget {
                 ),
               );
             },
-          ),
+          ) : SizedBox(),
         ],
       ),
     );

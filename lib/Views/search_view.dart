@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
 import 'package:ecommerce_admin/Cubit/Search_cubit/search_state.dart';
-import 'package:ecommerce_admin/Views/app_bar_for_dashboard.dart';
+import 'package:ecommerce_admin/Widgets/app_bar_for_dashboard.dart';
 import 'package:ecommerce_admin/Widgets/custom_product_widget.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
