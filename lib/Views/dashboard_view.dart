@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/Core/Helper/app_helper.dart';
 import 'package:ecommerce_admin/Views/app_bar_for_dashboard.dart';
 import 'package:ecommerce_admin/Widgets/dashboard_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,15 @@ class DashboardView extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
-                children: List.generate(3, (index) => DashboardWidget()),
+                children: List.generate(
+                  3,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DashboardWidget(
+                      item: AppHelper.dashboard(context)[index],
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
