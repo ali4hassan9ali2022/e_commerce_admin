@@ -13,7 +13,7 @@ class DashboardView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            AppBarForDashboard(size: size),
+            AppBarForDashboard(size: size,title: "ShopSmart",),
             SizedBox(height: 30),
             Expanded(
               child: GridView.count(

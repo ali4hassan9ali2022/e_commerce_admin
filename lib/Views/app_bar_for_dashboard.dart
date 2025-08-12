@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBarForDashboard extends StatelessWidget {
-  const AppBarForDashboard({super.key, required this.size});
+  const AppBarForDashboard({super.key, required this.size, required this.title});
 
   final Size size;
-
+  final String title;
   @override
   Widget build(BuildContext context) {
     var theme = BlocProvider.of<ThemeCubit>(context);
@@ -23,7 +23,7 @@ class AppBarForDashboard extends StatelessWidget {
             height: size.width * 0.15,
           ),
           SizedBox(width: 16),
-          ShimmerText(text: "ShopSmart"),
+          ShimmerText(text: title),
           Spacer(),
           BlocConsumer<ThemeCubit, ThemeState>(
             listener: (context, state) {

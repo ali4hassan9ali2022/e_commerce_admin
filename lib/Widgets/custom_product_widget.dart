@@ -20,6 +20,7 @@ class CustomProductWidget extends StatelessWidget {
         ),
         SizedBox(height: 6),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
               flex: 4,
@@ -30,40 +31,44 @@ class CustomProductWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Flexible(
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.favorite, color: Colors.red),
-              ),
-            ),
+            // Flexible(
+            //   child: IconButton(
+            //     onPressed: () {},
+            //     icon: Icon(Icons.favorite, color: Colors.red),
+            //   ),
+            // ),
           ],
         ),
         SizedBox(height: 6),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
               child: Text(
-                "150\$",
-                style: TextStyle(fontSize: 16, color: Colors.blue),
+                "15\$",
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w900,
+                ),
 
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Flexible(
-              child: IconButton.filled(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  minimumSize: Size(20, 20),
-                ),
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add_shopping_cart_rounded,
-                  size: 18,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            // Flexible(
+            //   child: IconButton.filled(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: Colors.blueAccent,
+            //       minimumSize: Size(20, 20),
+            //     ),
+            //     onPressed: () {},
+            //     icon: Icon(
+            //       Icons.add_shopping_cart_rounded,
+            //       size: 18,
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         SizedBox(height: 10),
