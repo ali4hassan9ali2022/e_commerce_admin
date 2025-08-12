@@ -9,17 +9,25 @@ class AddProductCubit extends Cubit<AddProductState> {
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productQtyController = TextEditingController();
   TextEditingController productDescriptionController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey();
   String? productCategory;
   void chooseCategory(String category) {
     productCategory = category;
     emit(ChooseCategoryState());
   }
+
+  void removeCategory() {
+    productCategory = null;
+    emit(RemoveCategoryState());
+  }
+
   XFile? imagePicker;
   uploadProfilePic(XFile image) {
     imagePicker = image;
     emit(UploadProfilePic());
   }
-   removeProfilePic() {
+
+  removeProfilePic() {
     imagePicker = null;
     emit(RemoveProfilePic());
   }
