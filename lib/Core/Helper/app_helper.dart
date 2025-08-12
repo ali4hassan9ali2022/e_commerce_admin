@@ -24,7 +24,9 @@ abstract class AppHelper {
     DashboardModel(
       title: "View orders",
       imagePath: Assets.imagesOrder,
-      function: () {},
+      function: () {
+        GoRouter.of(context).push(AppRouter.kViewOrdersView);
+      },
     ),
   ];
 }
