@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
+import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -71,10 +72,10 @@ class CustomImagePickerDialog extends StatelessWidget {
               if (addProduct.imagePicker != null) {
                 // await signUpCubit.removeProfilePic();
                 GoRouter.of(context).pop();
-                // CustomToastWidget.showSuccessToast("Profile picture removed");
+                CustomToastWidget.showSuccessToast("Profile picture removed");
               } else {
                 GoRouter.of(context).pop();
-                // CustomToastWidget.showErrorToast("Not found image");
+                CustomToastWidget.showErrorToast("Not found image");
               }
             },
             label: Text(
