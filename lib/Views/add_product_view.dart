@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin/Widgets/add_product_widget.dart';
 import 'package:ecommerce_admin/Widgets/app_bar_for_dashboard.dart';
+import 'package:ecommerce_admin/Widgets/custom_bottom_sheet_fot_add_product.dart';
 import 'package:flutter/material.dart';
 
 class AddProductView extends StatelessWidget {
@@ -9,41 +10,7 @@ class AddProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomSheet: Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                label: Text(
-                  "Clear",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-                icon: Icon(Icons.clear, size: 22, color: Colors.white),
-              ),
-            ),
-            Expanded(flex: 1, child: SizedBox(width: 5)),
-            Expanded(
-              flex: 5,
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                label: Text(
-                  "Upload product",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-                icon: Icon(Icons.upload, size: 22, color: Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomSheet: CustomBottomSheetFotAddProduct(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -57,3 +24,4 @@ class AddProductView extends StatelessWidget {
     );
   }
 }
+
