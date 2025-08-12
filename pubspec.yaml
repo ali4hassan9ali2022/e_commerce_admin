@@ -29,26 +29,21 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
-  flutter:
-    sdk: flutter
-  go_router: ^16.1.0
+  dotted_border: ^3.1.0
   dynamic_height_grid_view: ^0.0.4
   fancy_shimmer_image: ^2.0.3
+  flutter:
+    sdk: flutter
   flutter_bloc: ^9.1.1
   fluttertoast: ^8.2.12
   font_awesome_flutter: ^10.9.0
+  go_router: ^16.1.0
   hexcolor: ^3.0.1
   image_picker: ^1.1.2
   shared_preferences: ^2.5.3
   shimmer: ^3.0.0
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -92,4 +87,4 @@ flutter_assets:
   assets_path: assets/images
   output_path: lib/Core/utils
   filename: assets.dart
-  field_prefix:
+  field_prefix: null

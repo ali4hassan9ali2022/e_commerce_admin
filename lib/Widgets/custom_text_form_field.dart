@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.focusedBorder,
     this.focusNode,
     this.onFieldSubmitted,
+    this.contentPadding, this.maxLength,
   });
   final String? hintText;
   final Function(dynamic)? onChanged;
@@ -48,12 +49,15 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
   final FocusNode? focusNode;
+  final EdgeInsetsGeometry? contentPadding;
+  final int? maxLength;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: focusNode,
       maxLines: obscureText == true ? 1 : maxLines,
       textAlign: textAlign ?? TextAlign.start,
+      maxLength: maxLength,
       onTap: onTap,
       validator: validator,
       onChanged: onChanged,
@@ -66,9 +70,10 @@ class CustomTextFormField extends StatelessWidget {
       },
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
+      
         hintStyle: hintStyle,
         errorStyle: errorStyle,
-        contentPadding: EdgeInsets.zero,
+        contentPadding: contentPadding,
         hintText: hintText,
         label: label,
         border: border,
