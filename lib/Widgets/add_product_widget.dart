@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ecommerce_admin/Core/utils/app_constants.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_state.dart';
+import 'package:ecommerce_admin/Widgets/custom_image_picker_dialog.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,36 +23,88 @@ class AddProductWidget extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              SizedBox(
-                width: size.width * 0.4 + 10,
-                height: size.width * 0.4,
-                child: DottedBorder(
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.image_outlined,
-                          size: 80,
-                          color: Colors.blue,
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Pick product image",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue,
+              if (addProductCubit.imagePicker == null) ...[
+                SizedBox(
+                  width: size.width * 0.4 + 10,
+                  height: size.width * 0.4,
+                  child: DottedBorder(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.image_outlined,
+                            size: 80,
+                            color: Colors.blue,
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return CustomImagePickerDialog(
+                                    addProduct: addProductCubit,
+                                  );
+                                },
+                              );
+                            },
+                            child: Text(
+                              "Pick product image",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ] else ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.file(
+                    File(addProductCubit.imagePicker!.path),
+                    height: size.width * 0.5,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ],
+              if (addProductCubit.imagePicker != null) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomImagePickerDialog(
+                              addProduct: addProductCubit,
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Pick another image",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        addProductCubit.removeProfilePic();
+                      },
+                      child: Text(
+                        "Remove image",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               SizedBox(height: 25),
               DropdownButton(
                 value: addProductCubit.productCategory,

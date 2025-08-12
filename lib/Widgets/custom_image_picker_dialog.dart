@@ -70,7 +70,7 @@ class CustomImagePickerDialog extends StatelessWidget {
             ),
             onPressed: () async {
               if (addProduct.imagePicker != null) {
-                // await signUpCubit.removeProfilePic();
+                await addProduct.removeProfilePic();
                 GoRouter.of(context).pop();
                 CustomToastWidget.showSuccessToast("Profile picture removed");
               } else {
