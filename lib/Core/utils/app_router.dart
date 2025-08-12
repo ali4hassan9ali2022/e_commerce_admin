@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
+import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Views/add_product_view.dart';
 import 'package:ecommerce_admin/Views/dashboard_view.dart';
 import 'package:ecommerce_admin/Views/search_view.dart';
@@ -26,7 +27,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddProductView,
-        builder: (context, state) => AddProductView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AddProductCubit(),
+          child: AddProductView(),
+        ),
       ),
     ],
   );
