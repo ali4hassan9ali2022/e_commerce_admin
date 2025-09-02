@@ -8,6 +8,7 @@ class ProductModel with ChangeNotifier {
       productDescription,
       productImage,
       productQuantity;
+  final DateTime createdAt;
 
   ProductModel({
     required this.productId,
@@ -17,5 +18,6 @@ class ProductModel with ChangeNotifier {
     required this.productDescription,
     required this.productImage,
     required this.productQuantity,
+    required this.createdAt,
   });
 }
