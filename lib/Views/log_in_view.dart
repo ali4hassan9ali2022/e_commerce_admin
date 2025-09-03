@@ -3,13 +3,13 @@ import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
 import 'package:ecommerce_admin/Widgets/custom_button.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -106,78 +106,29 @@ class LogInView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 25),
-               Align(
-                    alignment: Alignment.center,
+              SizedBox(height: size.height * 0.35),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    Strings.dontHaveAnAccount,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // GoRouter.of(context).push(AppRouter.kSignUpView);
+                    },
                     child: Text(
-                      Strings.orConnect,
-                      style: TextStyle(fontSize: 20, color: Colors.grey[300]),
+                      Strings.signUp,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.blueAccent,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: ElevatedButton.icon(
-                          onPressed: () {},
-                          label: Text(
-                            Strings.signInWithGoogle,
-                            style: TextStyle(fontSize: 14, color: Colors.black),
-                          ),
-                          icon: Icon(
-                            FontAwesomeIcons.google,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 7),
-                      Expanded(
-                        flex: 2,
-                        child: ElevatedButton(
-                          onPressed: () {
-                          // Constants.isGuest = true;
-                          //   GoRouter.of(
-                          //     context,
-                          //   ).pushReplacement(AppRouter.kMainView);
-                          //   CustomToastWidget.showSuccessToast(Strings.guset);
-                          },
-                          child: Center(
-                            child: Text(
-                              Strings.guset,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 80),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        Strings.dontHaveAnAccount,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // GoRouter.of(context).push(AppRouter.kSignUpView);
-                        },
-                        child: Text(
-                          Strings.signUp,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                ],
+              ),
             ],
           ),
         ),
