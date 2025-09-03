@@ -8,20 +8,34 @@ class SignUpCubit extends Cubit<SignUpState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController secretKeyController = TextEditingController();
   GlobalKey<FormState> globalKey = GlobalKey();
   FocusNode emailNode = FocusNode();
   FocusNode passwordNode = FocusNode();
   FocusNode nameNode = FocusNode();
   FocusNode confirmPasswordNode = FocusNode();
-  IconData suffix = Icons.visibility_off_outlined;
-  bool isObsecure = true;
+  FocusNode secretKeyNode = FocusNode();
+  IconData suffixPassword = Icons.visibility_off_outlined;
+  bool isObsecurePassword = true;
+  IconData suffixConPassword = Icons.visibility_off_outlined;
+  bool isObsecureConPassword = true;
   void changePasswordVisibility() {
-    isObsecure = !isObsecure;
-
-    suffix = isObsecure
+    isObsecurePassword = !isObsecurePassword;
+    // isObsecureConPassword = !isObsecureConPassword;
+    suffixPassword = isObsecurePassword
         ? Icons.visibility_off_outlined
         : Icons.visibility_outlined;
+
     emit(ChangePassworsVisibailitystate());
+  }
+
+  void changeConPasswordVisibility() {
+    isObsecureConPassword = !isObsecureConPassword;
+    suffixConPassword = isObsecureConPassword
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
+
+    emit(ChangeConPassworsVisibailitystate());
   }
   // late SupabaseClient supabase = Supabase.instance.client;
   // late UserModel signUpModel;

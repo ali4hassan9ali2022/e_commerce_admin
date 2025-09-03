@@ -3,6 +3,7 @@ abstract class SignUpState {}
 class SignUpInitialState extends SignUpState {}
 
 class ChangePassworsVisibailitystate extends SignUpState {}
+class ChangeConPassworsVisibailitystate extends SignUpState {}
 
 class LoadingSignUpState extends SignUpState {}
 
