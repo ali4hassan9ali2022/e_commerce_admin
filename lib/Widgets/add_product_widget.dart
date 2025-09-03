@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_state.dart';
 import 'package:ecommerce_admin/Widgets/custom_image_picker_dialog.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
+import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +21,15 @@ class AddProductWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocConsumer<AddProductCubit, AddProductState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddProductSuccess) {
+            CustomToastWidget.showSuccessToast("Add Product success");
+          } else if (state is AddProductFailure) {
+            // CustomToastWidget.showErrorToast("Don't add product");
+            CustomToastWidget.showErrorToast(state.errMessage);
+            log(state.errMessage);
+          }
+        },
         builder: (context, state) {
           return Form(
             key: addProductCubit.formKey,

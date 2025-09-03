@@ -2,6 +2,7 @@ import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Views/add_product_view.dart';
 import 'package:ecommerce_admin/Views/dashboard_view.dart';
+import 'package:ecommerce_admin/Views/log_in_view.dart';
 import 'package:ecommerce_admin/Views/search_view.dart';
 import 'package:ecommerce_admin/Views/view_orders_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +12,14 @@ abstract class AppRouter {
   static const String kSearchView = "/kSearchView";
   static const String kViewOrdersView = "/kViewOrdersView";
   static const String kAddProductView = "/kAddProductView";
+  static const String kDashboardView = "/kDashboardView";
   static final router = GoRouter(
     routes: [
-      GoRoute(path: "/", builder: (context, state) => DashboardView()),
+      GoRoute(path: "/", builder: (context, state) => LogInView()),
+      GoRoute(
+        path: kDashboardView,
+        builder: (context, state) => DashboardView(),
+      ),
       GoRoute(
         path: kSearchView,
         builder: (context, state) => BlocProvider(

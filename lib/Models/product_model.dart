@@ -20,4 +20,16 @@ class ProductModel with ChangeNotifier {
     required this.productQuantity,
     required this.createdAt,
   });
+  toJosn() {
+    return {
+      "productId": productId,
+      "productTitle": productTitle,
+      "productPrice": productPrice,
+      "productCategory": productCategory,
+      "productDescription": productDescription,
+      "productImage": productImage,
+      "productQuantity": productQuantity,
+      "createdAt": createdAt.toIso8601String(),
+    };
+  }
 }

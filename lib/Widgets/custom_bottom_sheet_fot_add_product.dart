@@ -54,13 +54,21 @@ class CustomBottomSheetFotAddProduct extends StatelessWidget {
                         "Please select a product image",
                       );
                     }
-                    if (addProductCubit.formKey.currentState!.validate()) {}
+                    if (addProductCubit.formKey.currentState!.validate()) {
+                      addProductCubit.addProduct();
+                    }
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                  label: Text(
-                    "Upload product",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
+                  label: state is AddProductLoading
+                      ? SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(),
+                        )
+                      : Text(
+                          "Upload product",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
                   icon: Icon(Icons.upload, size: 22, color: Colors.white),
                 ),
               ),
