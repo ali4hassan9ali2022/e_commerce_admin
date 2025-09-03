@@ -1,8 +1,10 @@
+import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:ecommerce_admin/Core/utils/strings.dart';
 import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
 import 'package:ecommerce_admin/Widgets/custom_button.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
@@ -116,7 +118,7 @@ class LogInView extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // GoRouter.of(context).push(AppRouter.kSignUpView);
+                      GoRouter.of(context).push(AppRouter.kRegisterView);
                     },
                     child: Text(
                       Strings.signUp,

@@ -9,4 +9,9 @@ abstract class Strings {
   static const signInWithGoogle = 'Sign in with Google';
   static const guset = 'Guest?';
   static const dontHaveAnAccount = 'Don\'t have an account? ';
+  static const letSignUp =
+      'Sign up now to receive special offers and updates from our app';
+  static const name = 'Name';
+  static const confirmPassword = 'Confirm Password';
+  static const alreadyHaveAnAccount = 'Already have an account? ';
 }
