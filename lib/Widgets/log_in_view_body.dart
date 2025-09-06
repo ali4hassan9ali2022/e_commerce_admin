@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:ecommerce_admin/Core/utils/strings.dart';
 import 'package:ecommerce_admin/Cubit/log_in_cubit/log_in_cubit.dart';
@@ -6,6 +8,7 @@ import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
 import 'package:ecommerce_admin/Widgets/custom_button.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:ecommerce_admin/Widgets/my_validators.dart';
+import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +23,15 @@ class LogInViewBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: BlocConsumer<LogInCubit, LogInState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SuccessSignInState) {
+            GoRouter.of(context).push(AppRouter.kDashboardView);
+            CustomToastWidget.showSuccessToast("Successfully Sign In");
+          } else if (state is FailureSignInState) {
+            CustomToastWidget.showErrorToast(state.errMessage);
+            log(state.errMessage);
+          }
+        },
         builder: (context, state) {
           return SingleChildScrollView(
             child: Form(
@@ -101,7 +112,7 @@ class LogInViewBody extends StatelessWidget {
                     onTap: () {
                       if (loginCubit.globalKey.currentState!.validate()) {
                         loginCubit.globalKey.currentState!.save();
-                        // loginCibit.signIn();
+                        loginCubit.signIn();
                       }
                     },
                     borderRadius: 12,
@@ -109,14 +120,20 @@ class LogInViewBody extends StatelessWidget {
                     height: 40,
                     width: double.infinity,
                     child: Center(
-                      child: Text(
-                        Strings.signIn,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: state is LoadingSignInState
+                          ? SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text(
+                              Strings.signIn,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.deepPurple,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                   SizedBox(height: size.height * 0.35),

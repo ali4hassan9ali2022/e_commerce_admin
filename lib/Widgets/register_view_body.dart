@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:ecommerce_admin/Core/Helper/secret_words.dart';
+import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:ecommerce_admin/Core/utils/strings.dart';
 import 'package:ecommerce_admin/Cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:ecommerce_admin/Cubit/sign_up_cubit/sign_up_state.dart';
@@ -6,6 +9,7 @@ import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
 import 'package:ecommerce_admin/Widgets/custom_button.dart';
 import 'package:ecommerce_admin/Widgets/custom_text_form_field.dart';
 import 'package:ecommerce_admin/Widgets/my_validators.dart';
+import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +23,15 @@ class RegisterViewBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: BlocConsumer<SignUpCubit, SignUpState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SuccessSignUpState) {
+            GoRouter.of(context).push(AppRouter.kDashboardView);
+            CustomToastWidget.showSuccessToast("Successfully Sign Up");
+          } else if (state is FailureSignUpState) {
+            CustomToastWidget.showErrorToast(state.errMessage);
+            log(state.errMessage);
+          }
+        },
         builder: (context, state) {
           return SingleChildScrollView(
             child: Form(
@@ -156,7 +168,7 @@ class RegisterViewBody extends StatelessWidget {
                     onTap: () {
                       if (signUpCubit.globalKey.currentState!.validate()) {
                         signUpCubit.globalKey.currentState!.save();
-                        // signUpCibit.signUp();
+                        signUpCubit.signUp();
                       }
                     },
                     borderRadius: 12,
@@ -164,14 +176,20 @@ class RegisterViewBody extends StatelessWidget {
                     height: 40,
                     width: double.infinity,
                     child: Center(
-                      child: Text(
-                        Strings.signUp,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: state is LoadingSignUpState
+                          ? SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text(
+                              Strings.signUp,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.deepPurple,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                   SizedBox(height: 50),

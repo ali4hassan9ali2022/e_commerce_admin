@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/Core/Helper/app_helper.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_state.dart';
 import 'package:ecommerce_admin/Widgets/toast_widget.dart';
@@ -24,12 +25,7 @@ class CustomBottomSheetFotAddProduct extends StatelessWidget {
                 flex: 3,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    addProductCubit.productDescriptionController.clear();
-                    addProductCubit.productPriceController.clear();
-                    addProductCubit.productQtyController.clear();
-                    addProductCubit.productTitleController.clear();
-                    addProductCubit.removeProfilePic();
-                    addProductCubit.removeCategory();
+                    AppHelper.clearAllFields(addProductCubit: addProductCubit);
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   label: Text(

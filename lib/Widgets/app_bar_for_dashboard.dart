@@ -2,6 +2,7 @@ import 'package:ecommerce_admin/Core/Theme_Cubit/theme_cubit.dart';
 import 'package:ecommerce_admin/Core/Theme_Cubit/theme_state.dart';
 import 'package:ecommerce_admin/Core/utils/assets.dart';
 import 'package:ecommerce_admin/Widgets/app_shimmer%20.dart';
+import 'package:ecommerce_admin/Widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,6 +51,16 @@ class AppBarForDashboard extends StatelessWidget {
                         );
                       },
                     )
+                  : SizedBox(),
+              isShow == true
+                  ? IconButton(onPressed: () async{
+                    await showDialog(
+                              context: context,
+                              builder: (context) {
+                                return CustomAlertDialog();
+                              },
+                            );
+                  }, icon: Icon(Icons.logout))
                   : SizedBox(),
             ],
           ),

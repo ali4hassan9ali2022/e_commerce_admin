@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:ecommerce_admin/Core/utils/assets.dart';
+import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Models/dashboard_model.dart';
 import 'package:ecommerce_admin/Models/product_model.dart';
+import 'package:ecommerce_admin/Models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +14,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class AppHelper {
   static const String kDark = "isDark";
   static bool isDark = false;
-
+  static late UserModel userModel;
   static List<DashboardModel> dashboard(BuildContext context) => [
     DashboardModel(
       title: "Add a new product",
@@ -76,4 +78,12 @@ abstract class AppHelper {
     return imageUrl;
   }
   static late ProductModel productModel;
+  static  void clearAllFields({required AddProductCubit addProductCubit}) {
+    addProductCubit.productDescriptionController.clear();
+    addProductCubit.productPriceController.clear();
+    addProductCubit.productQtyController.clear();
+    addProductCubit.productTitleController.clear();
+    addProductCubit.removeProfilePic();
+    addProductCubit.removeCategory();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/Core/Database/Network/supabase_helper.dart';
 import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Views/add_product_view.dart';
@@ -15,6 +16,7 @@ abstract class AppRouter {
   static const String kAddProductView = "/kAddProductView";
   static const String kDashboardView = "/kDashboardView";
   static const String kRegisterView = "/kRegisterView";
+  static const kSignInView = "/SignInView";
   static final router = GoRouter(
     routes: [
       GoRoute(path: "/", builder: (context, state) => LogInView()),
@@ -42,5 +44,24 @@ abstract class AppRouter {
         ),
       ),
     ],
+    redirect: (context, state) {
+      final user = SupabaseHelper.supabase.auth.currentUser;
+      final bool isLoggedIn = user != null;
+      final bool isLoggingIn = state.uri.toString() == '/';
+      // if (Constants.isGuest) {
+      //   return null;
+      // }
+      if (isLoggedIn) {
+        if (isLoggingIn) {
+          return kDashboardView;
+        }
+        return null;
+      } else {
+        if (!isLoggingIn && state.uri.toString() != kRegisterView) {
+          return '/';
+        }
+        return null;
+      }
+    },
   );
 }
