@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin/Core/Helper/secret_words.dart';
 import 'package:ecommerce_admin/Core/utils/strings.dart';
 import 'package:ecommerce_admin/Cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'package:ecommerce_admin/Cubit/sign_up_cubit/sign_up_state.dart';
@@ -132,6 +133,12 @@ class RegisterViewBody extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   CustomTextFormField(
+                    validator: (value) {
+                      if (value != SecretWords.secretKey) {
+                        return "Error";
+                      }
+                      return null;
+                    },
                     onFieldSubmitted: (value) {
                       // FocusScope.of(
                       //   context,
