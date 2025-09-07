@@ -3,6 +3,7 @@ import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
 import 'package:ecommerce_admin/Views/add_product_view.dart';
 import 'package:ecommerce_admin/Views/dashboard_view.dart';
+import 'package:ecommerce_admin/Views/edit_product_view.dart';
 import 'package:ecommerce_admin/Views/log_in_view.dart';
 import 'package:ecommerce_admin/Views/register_view.dart';
 import 'package:ecommerce_admin/Views/search_view.dart';
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const String kDashboardView = "/kDashboardView";
   static const String kRegisterView = "/kRegisterView";
   static const kSignInView = "/SignInView";
+  static const kEditProductView = "/EditProductView";
   static final router = GoRouter(
     routes: [
       GoRoute(path: "/", builder: (context, state) => LogInView()),
@@ -42,6 +44,10 @@ abstract class AppRouter {
           create: (context) => AddProductCubit(),
           child: AddProductView(),
         ),
+      ),
+      GoRoute(
+        path: kEditProductView,
+        builder: (context, state) => EditProductView(),
       ),
     ],
     redirect: (context, state) {
