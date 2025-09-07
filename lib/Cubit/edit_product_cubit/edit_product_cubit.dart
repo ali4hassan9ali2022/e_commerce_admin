@@ -1,6 +1,34 @@
 import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProductCubit extends Cubit<EditProductState> {
   EditProductCubit() : super(EditProductInitialState());
+  TextEditingController productTitleController = TextEditingController();
+  TextEditingController productPriceController = TextEditingController();
+  TextEditingController productQtyController = TextEditingController();
+  TextEditingController productDescriptionController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey();
+  String? productCategory;
+  void chooseCategory(String category) {
+    productCategory = category;
+    emit(ChooseCategoryState());
+  }
+
+  void removeCategory() {
+    productCategory = null;
+    emit(RemoveCategoryState());
+  }
+
+  XFile? imagePicker;
+  uploadProfilePic(XFile image) {
+    imagePicker = image;
+    emit(UploadProfilePic());
+  }
+
+  removeProfilePic() {
+    imagePicker = null;
+    emit(RemoveProfilePic());
+  }
 }
