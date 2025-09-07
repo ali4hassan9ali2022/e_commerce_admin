@@ -1,6 +1,8 @@
 import 'package:ecommerce_admin/Core/Database/Network/supabase_helper.dart';
 import 'package:ecommerce_admin/Cubit/Search_cubit/search_cubit.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
+import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_cubit.dart';
+import 'package:ecommerce_admin/Models/product_model.dart';
 import 'package:ecommerce_admin/Views/add_product_view.dart';
 import 'package:ecommerce_admin/Views/dashboard_view.dart';
 import 'package:ecommerce_admin/Views/edit_product_view.dart';
@@ -47,7 +49,14 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kEditProductView,
-        builder: (context, state) => EditProductView(),
+        builder: (context, state) {
+          final product = state.extra as ProductModel;
+          return BlocProvider(
+            create: (context) =>
+                EditProductCubit()..fillFormWithProduct(product),
+            child: EditProductView(),
+          );
+        },
       ),
     ],
     redirect: (context, state) {

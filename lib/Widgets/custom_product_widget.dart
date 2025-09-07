@@ -1,10 +1,10 @@
-import 'package:ecommerce_admin/Core/utils/app_constants.dart';
+import 'package:ecommerce_admin/Models/product_model.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductWidget extends StatelessWidget {
-  const CustomProductWidget({super.key});
-
+  const CustomProductWidget({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -13,7 +13,7 @@ class CustomProductWidget extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: FancyShimmerImage(
-            imageUrl: AppConstants.productImageUrl,
+            imageUrl: productModel.productImage,
 
             height: size.height * 0.22,
           ),
@@ -25,7 +25,7 @@ class CustomProductWidget extends StatelessWidget {
             Flexible(
               flex: 4,
               child: Text(
-                "Title" * 10,
+                productModel.productTitle,
                 style: TextStyle(fontSize: 18),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -45,7 +45,7 @@ class CustomProductWidget extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "15\$",
+                "${productModel.productPrice}\$",
                 style: TextStyle(
                   fontSize: 22,
                   color: Colors.grey,

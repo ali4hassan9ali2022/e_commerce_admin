@@ -11,16 +11,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class SearchView extends StatelessWidget {
+class SearchView extends StatefulWidget {
   const SearchView({super.key});
+
+  @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    BlocProvider.of<SearchCubit>(context).fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var searchCubit = BlocProvider.of<SearchCubit>(context);
     return Scaffold(
-      body: BlocConsumer<SearchCubit, SearchState>(
-        listener: (context, state) {},
+      body: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -48,26 +62,33 @@ class SearchView extends StatelessWidget {
                 ),
 
                 SizedBox(height: 15),
-                DynamicHeightGridView(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  builder: (context, index) => InkWell(
-                    onTap: () async {
-                      await GoRouter.of(
-                        context,
-                      ).push(AppRouter.kEditProductView);
-                      // await Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ProductsDetailsView(),
-                      //   ),
-                      // );
-                    },
-                    child: CustomProductWidget(),
-                  ),
-                  itemCount: 100,
-                  crossAxisCount: 2,
-                ),
+                state is SuccessSearchState
+                    ? DynamicHeightGridView(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        builder: (context, index) => InkWell(
+                          onTap: () async {
+                            final product = searchCubit.productsList[index];
+                            await GoRouter.of(
+                              context,
+                            ).push(AppRouter.kEditProductView, extra: product);
+                            // await Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => ProductsDetailsView(),
+                            //   ),
+                            // );
+                          },
+                          child: CustomProductWidget(
+                            productModel: state.products[index],
+                          ),
+                        ),
+                        itemCount: state.products.length,
+                        crossAxisCount: 2,
+                      )
+                    : state is LoadingSearchState
+                    ? Center(child: CircularProgressIndicator())
+                    : Center(child: Text("Not Products found")),
               ],
             ),
           );

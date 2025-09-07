@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_state.dart';
+import 'package:ecommerce_admin/Models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,5 +31,15 @@ class EditProductCubit extends Cubit<EditProductState> {
   removeProfilePic() {
     imagePicker = null;
     emit(RemoveProfilePic());
+  }
+
+  void fillFormWithProduct(ProductModel product) {
+    productTitleController.text = product.productTitle;
+    productPriceController.text = product.productPrice;
+    productQtyController.text = product.productQuantity;
+    productDescriptionController.text = product.productDescription;
+    productCategory = product.productCategory;
+
+    imagePicker = XFile(product.productImage); // لو الصورة جاية من URL
   }
 }

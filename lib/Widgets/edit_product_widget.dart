@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ecommerce_admin/Core/utils/app_constants.dart';
 import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_cubit.dart';
@@ -15,6 +13,7 @@ class EditProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var editProductCubit = BlocProvider.of<EditProductCubit>(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
@@ -22,7 +21,26 @@ class EditProductWidget extends StatelessWidget {
           key: editProductCubit.formKey,
           child: Column(
             children: [
-              if (editProductCubit.imagePicker == null) ...[
+              // ✅ صورة المنتج
+              if (editProductCubit.imagePicker != null) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    editProductCubit.imagePicker!.path,
+                    height: size.width * 0.5,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ] else if (editProductCubit.imagePicker != null) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    editProductCubit.imagePicker!.path,
+                    height: size.width * 0.5,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              ] else ...[
                 SizedBox(
                   width: size.width * 0.4 + 10,
                   height: size.width * 0.4,
@@ -32,7 +50,7 @@ class EditProductWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.image_outlined,
                             size: 80,
                             color: Colors.blue,
@@ -48,7 +66,7 @@ class EditProductWidget extends StatelessWidget {
                                 },
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               "Pick product image",
                               style: TextStyle(
                                 fontSize: 14,
@@ -62,17 +80,9 @@ class EditProductWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              ] else ...[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.file(
-                    File(editProductCubit.imagePicker!.path),
-                    height: size.width * 0.5,
-                    alignment: Alignment.center,
-                  ),
-                ),
               ],
-              if (editProductCubit.imagePicker != null) ...[
+              if (editProductCubit.imagePicker != null ||
+                  editProductCubit.imagePicker != null) ...[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,7 +97,7 @@ class EditProductWidget extends StatelessWidget {
                           },
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Pick another image",
                         style: TextStyle(color: Colors.green),
                       ),
@@ -96,7 +106,7 @@ class EditProductWidget extends StatelessWidget {
                       onPressed: () {
                         editProductCubit.removeProfilePic();
                       },
-                      child: Text(
+                      child: const Text(
                         "Remove image",
                         style: TextStyle(color: Colors.red),
                       ),
@@ -104,64 +114,71 @@ class EditProductWidget extends StatelessWidget {
                   ],
                 ),
               ],
-              SizedBox(height: 25),
+
+              const SizedBox(height: 25),
               DropdownButton(
                 value: editProductCubit.productCategory,
-                hint: Text("Select a category"),
+                hint: const Text("Select a category"),
                 items: AppConstants.categoriesDropDownList,
                 onChanged: (value) {
                   editProductCubit.chooseCategory(value!);
                 },
               ),
-              SizedBox(height: 25),
+
+              const SizedBox(height: 25),
+
+              // ✅ العنوان
               CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "Please select a product title";
+                    return "Please enter a product title";
                   }
                   return null;
                 },
                 maxLength: 80,
                 controller: editProductCubit.productTitleController,
                 hintText: "Product title",
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(height: 15),
+
+              const SizedBox(height: 15),
+
+              // ✅ السعر والكمية
               Row(
                 children: [
                   Expanded(
                     child: CustomTextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please select a price";
+                          return "Please enter a price";
                         }
                         return null;
                       },
                       hintText: "Price",
                       controller: editProductCubit.productPriceController,
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Expanded(
                     child: CustomTextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please select a product Qty";
+                          return "Please enter product quantity";
                         }
                         return null;
                       },
                       controller: editProductCubit.productQtyController,
                       hintText: "Qty",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
@@ -170,11 +187,14 @@ class EditProductWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 15),
+
+              const SizedBox(height: 15),
+
+              // ✅ الوصف
               CustomTextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return "Please select a description";
+                    return "Please enter a description";
                   }
                   return null;
                 },
@@ -182,13 +202,12 @@ class EditProductWidget extends StatelessWidget {
                 maxLength: 1000,
                 maxLines: 5,
                 hintText: "Product description",
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(),
             ],
           ),
         ),

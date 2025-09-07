@@ -32,4 +32,16 @@ class ProductModel with ChangeNotifier {
       "createdAt": createdAt.toIso8601String(),
     };
   }
+  factory ProductModel.fromJson(json) {
+    return ProductModel(
+      productId: json["productId"] ?? "",
+      productTitle: json["productTitle"] ?? "",
+      productPrice: json["productPrice"] ?? "",
+      productDescription: json["productDescription"] ?? "",
+      productImage: json["productImage"] ?? "",
+      productQuantity: json["productQuantity"] ?? "",
+      createdAt: DateTime.now(),
+      productCategory: json["productCategory"] ?? "",
+    );
+  }
 }
