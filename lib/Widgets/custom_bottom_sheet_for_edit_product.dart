@@ -1,17 +1,17 @@
 import 'package:ecommerce_admin/Core/Helper/app_helper.dart';
-import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
-import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_state.dart';
+import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_cubit.dart';
+import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_state.dart';
 import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomBottomSheetFotAddProduct extends StatelessWidget {
-  const CustomBottomSheetFotAddProduct({super.key});
-  
+class CustomBottomSheetForEditProduct extends StatelessWidget {
+  const CustomBottomSheetForEditProduct({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var addProductCubit = BlocProvider.of<AddProductCubit>(context);
-    return BlocConsumer<AddProductCubit, AddProductState>(
+    var editProductCubit = BlocProvider.of<EditProductCubit>(context);
+    return BlocConsumer<EditProductCubit, EditProductState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Container(
@@ -25,7 +25,9 @@ class CustomBottomSheetFotAddProduct extends StatelessWidget {
                 flex: 3,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    AppHelper.clearAllFields(addProductCubit: addProductCubit);
+                    AppHelper.clearAllFieldsEdit(
+                      editProductCubit: editProductCubit,
+                    );
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   label: Text(
@@ -40,29 +42,29 @@ class CustomBottomSheetFotAddProduct extends StatelessWidget {
                 flex: 5,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    if (addProductCubit.productCategory == null) {
+                    if (editProductCubit.productCategory == null) {
                       CustomToastWidget.showWarningToast(
                         "Please select a product category",
                       );
                     }
-                    if (addProductCubit.imagePicker == null) {
+                    if (editProductCubit.imagePicker == null) {
                       CustomToastWidget.showWarningToast(
                         "Please select a product image",
                       );
                     }
-                    if (addProductCubit.formKey.currentState!.validate()) {
-                      addProductCubit.addProduct();
+                    if (editProductCubit.formKey.currentState!.validate()) {
+                      // addProductCubit.addProduct();
                     }
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                  label: state is AddProductLoading
+                  label: state is LoadingEditProductState
                       ? SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(),
                         )
                       : Text(
-                          "Upload product",
+                          "Edit product",
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                   icon: Icon(Icons.upload, size: 22, color: Colors.white),

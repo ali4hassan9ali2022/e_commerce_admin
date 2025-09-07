@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ecommerce_admin/Core/utils/app_router.dart';
 import 'package:ecommerce_admin/Core/utils/assets.dart';
 import 'package:ecommerce_admin/Cubit/add_product_cubit/add_product_cubit.dart';
+import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_cubit.dart';
 import 'package:ecommerce_admin/Models/dashboard_model.dart';
 import 'package:ecommerce_admin/Models/product_model.dart';
 import 'package:ecommerce_admin/Models/user_model.dart';
@@ -85,5 +86,13 @@ abstract class AppHelper {
     addProductCubit.productTitleController.clear();
     addProductCubit.removeProfilePic();
     addProductCubit.removeCategory();
+  }
+  static  void clearAllFieldsEdit({required EditProductCubit editProductCubit}) {
+    editProductCubit.productDescriptionController.clear();
+    editProductCubit.productPriceController.clear();
+    editProductCubit.productQtyController.clear();
+    editProductCubit.productTitleController.clear();
+    editProductCubit.removeProfilePic();
+    editProductCubit.removeCategory();
   }
 }
