@@ -72,12 +72,7 @@ class _SearchViewState extends State<SearchView> {
                             await GoRouter.of(
                               context,
                             ).push(AppRouter.kEditProductView, extra: product);
-                            // await Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => ProductsDetailsView(),
-                            //   ),
-                            // );
+                            searchCubit.fetchProducts();
                           },
                           child: CustomProductWidget(
                             productModel: state.products[index],

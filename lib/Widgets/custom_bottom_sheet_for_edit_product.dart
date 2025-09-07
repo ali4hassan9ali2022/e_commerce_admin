@@ -1,13 +1,12 @@
 import 'package:ecommerce_admin/Core/Helper/app_helper.dart';
 import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_cubit.dart';
 import 'package:ecommerce_admin/Cubit/edit_product_cubit/edit_product_state.dart';
-import 'package:ecommerce_admin/Widgets/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBottomSheetForEditProduct extends StatelessWidget {
-  const CustomBottomSheetForEditProduct({super.key});
-
+  const CustomBottomSheetForEditProduct({super.key, required this.productId});
+  final String productId;
   @override
   Widget build(BuildContext context) {
     var editProductCubit = BlocProvider.of<EditProductCubit>(context);
@@ -42,18 +41,8 @@ class CustomBottomSheetForEditProduct extends StatelessWidget {
                 flex: 5,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    if (editProductCubit.productCategory == null) {
-                      CustomToastWidget.showWarningToast(
-                        "Please select a product category",
-                      );
-                    }
-                    if (editProductCubit.imagePicker == null) {
-                      CustomToastWidget.showWarningToast(
-                        "Please select a product image",
-                      );
-                    }
                     if (editProductCubit.formKey.currentState!.validate()) {
-                      // addProductCubit.addProduct();
+                      editProductCubit.editProduct(productId);
                     }
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),

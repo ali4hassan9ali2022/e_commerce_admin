@@ -78,8 +78,9 @@ abstract class AppHelper {
     }
     return imageUrl;
   }
+
   static late ProductModel productModel;
-  static  void clearAllFields({required AddProductCubit addProductCubit}) {
+  static void clearAllFields({required AddProductCubit addProductCubit}) {
     addProductCubit.productDescriptionController.clear();
     addProductCubit.productPriceController.clear();
     addProductCubit.productQtyController.clear();
@@ -87,7 +88,8 @@ abstract class AppHelper {
     addProductCubit.removeProfilePic();
     addProductCubit.removeCategory();
   }
-  static  void clearAllFieldsEdit({required EditProductCubit editProductCubit}) {
+
+  static void clearAllFieldsEdit({required EditProductCubit editProductCubit}) {
     editProductCubit.productDescriptionController.clear();
     editProductCubit.productPriceController.clear();
     editProductCubit.productQtyController.clear();

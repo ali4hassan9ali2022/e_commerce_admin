@@ -54,7 +54,7 @@ abstract class AppRouter {
           return BlocProvider(
             create: (context) =>
                 EditProductCubit()..fillFormWithProduct(product),
-            child: EditProductView(),
+            child: EditProductView(product: product),
           );
         },
       ),
